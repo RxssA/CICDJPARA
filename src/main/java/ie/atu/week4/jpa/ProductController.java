@@ -17,20 +17,20 @@ public class ProductController {
         this.productService = productService;
         this.productRepo = productRepo;
     }
-
+    @GetMapping("/all")
     public List<Product> getProducts() {
         return productService.findAll();
     }
-
+    @PostMapping("/add")
     public void addProduct(Product product) {
       productService.add(product);
     }
-
+    @PutMapping("/update/{id}")
     public void updateProduct(Long id, Product product) {
         Product updateProduct = productRepo.getReferenceById(id);
         updateProduct.setId(product.getId());
     }
-
+    @DeleteMapping("/remove/{id}")
     public void deleteProduct(Long id) {
         productRepo.deleteById(id);
     }
