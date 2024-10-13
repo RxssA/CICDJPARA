@@ -29,8 +29,10 @@ public class ProductService {
 
     public void update(Long id, Product product){
         Product updatedProduct = productRepo.getReferenceById(id);
-        updatedProduct.setProductName(updatedProduct.getProductName());
-        updatedProduct.setProductDescription(updatedProduct.getProductDescription());
-        updatedProduct.setProductPrice(updatedProduct.getProductPrice());
+        updatedProduct.setProductName(product.getProductName());
+        updatedProduct.setProductDescription(product.getProductDescription());
+        updatedProduct.setProductPrice(product.getProductPrice());
+
+        productRepo.save(updatedProduct);
     }
 }

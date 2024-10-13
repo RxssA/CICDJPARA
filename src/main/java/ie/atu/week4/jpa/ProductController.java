@@ -1,5 +1,6 @@
 package ie.atu.week4.jpa;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,16 +23,17 @@ public class ProductController {
         return productService.findAll();
     }
     @PostMapping("/add")
-    public void addProduct(Product product) {
+    public Product addProduct(@Valid @RequestBody  Product product) {
       productService.add(product);
+      return product;
     }
     @PutMapping("/update/{id}")
-    public void updateProduct(Long id, Product product) {
-        Product updateProduct = productRepo.getReferenceById(id);
-        updateProduct.setId(product.getId());
+    public Product updateProduct(@Valid @PathVariable Long id,@Valid @RequestBody Product product) {
+        productService.update(id, product);
+        return product;
     }
     @DeleteMapping("/remove/{id}")
-    public void deleteProduct(Long id) {
+    public void deleteProduct(@Valid @PathVariable Long id) {
         productRepo.deleteById(id);
     }
 }
